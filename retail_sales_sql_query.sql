@@ -40,23 +40,23 @@ WHERE
     OR cogs IS NULL
     OR total_sale IS NULL;
 
--- How many unique customers do we have?
+-- Q.1: How many unique customers do we have?
 SELECT 
     COUNT(DISTINCT customer_id) AS total_customers
 FROM
     sales_data;
 
--- Find the grand total price 
+-- Q.2: Find the grand total price 
 SELECT 
     SUM((quantity * price_per_unit)) AS total_price
 FROM
     sales_data;
 
--- How many sales records do we have?
+-- Q.3: How many sales records do we have?
 SELECT COUNT(*) AS total_records
 FROM sales_data;
 
--- How many unique categories do we have?
+-- Q.4: How many unique categories do we have?
 SELECT DISTINCT
     category AS categories
 FROM
@@ -64,7 +64,7 @@ FROM
 
 -- Data Analysis & Business Problems
 
--- Q.1: Retrieve all columns for sales made on '2022-11-05'
+-- Q.5: Retrieve all columns for sales made on '2022-11-05'
 SELECT 
     *
 FROM
@@ -72,7 +72,7 @@ FROM
 WHERE
     sale_date = '2022-11-05';
 
--- Q.2: Retrieve all 'Clothing' category transactions with quantity < 4 in Nov-2022
+-- Q.6: Retrieve all 'Clothing' category transactions with quantity < 4 in Nov-2022
 SELECT 
     *
 FROM
@@ -82,7 +82,7 @@ WHERE
         AND YEAR(sale_date) = 2022
         AND MONTH(sale_date) = 11;
 
--- Q.3: Total sales (total_sale) and order count per category
+-- Q.7: Total sales (total_sale) and order count per category
 SELECT 
     category,
     SUM(total_sale) AS category_wise_total_sale,
@@ -91,7 +91,7 @@ FROM
     sales_data
 GROUP BY category;
 
--- Q.4: Average age of customers who purchased 'Beauty' items
+-- Q.8: Average age of customers who purchased 'Beauty' items
 SELECT 
     ROUND(AVG(age), 2) AS avg_customrs_age
 FROM
@@ -99,7 +99,7 @@ FROM
 WHERE
     category = 'Beauty';
 
--- Q.5: Find all transactions with total_sale > 1000
+-- Q.9: Find all transactions with total_sale > 1000
 SELECT 
     *
 FROM
@@ -107,7 +107,7 @@ FROM
 WHERE
     total_sale > 1000;
 
--- Q.6: Number of transactions made by each gender in each category
+-- Q.10: Number of transactions made by each gender in each category
 SELECT 
     COUNT(transactions_id) AS total_transactions,
     category,
@@ -117,7 +117,7 @@ FROM
 GROUP BY category , gender
 ORDER BY category;
 
--- Q.7: Average sale per month & best selling month in each year
+-- Q.11: Average sale per month & best selling month in each year
 WITH monthly_avg_sales AS (
     SELECT 
         YEAR(sale_date) AS sale_year,
@@ -135,7 +135,7 @@ SELECT sale_year, sale_month, avg_sale
 FROM ranked_months
 WHERE rank_in_year = 1;
 
--- Q.8: Top 5 customers based on total sales
+-- Q.12: Top 5 customers based on total sales
 SELECT 
     customer_id, SUM(total_sale) AS total_sale
 FROM
@@ -144,14 +144,14 @@ GROUP BY customer_id
 ORDER BY total_sale DESC
 LIMIT 5;
 
--- Q.9: Number of unique customers per category
+-- Q.13: Number of unique customers per category
 SELECT 
     category, COUNT(DISTINCT customer_id) AS cnt_unique_cs
 FROM
     sales_data
 GROUP BY category;
 
--- Q.10: Create shifts (Morning, Afternoon, Evening) and count orders per shift
+-- Q.14: Create shifts (Morning, Afternoon, Evening) and count orders per shift
 WITH hourly_sales AS (
 	SELECT 
 		*,
