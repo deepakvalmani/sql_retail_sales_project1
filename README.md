@@ -272,7 +272,7 @@ This project showcases the core skills of a data analyst: data exploration, data
 
 ## 👨‍💻 Author
 
-**Zero Analyst (Deepak Raj)**  
+**Deepak Raj**  
 Passionate about data, analysis, and building solutions that make business decisions easier.
 
 ---
@@ -283,6 +283,3 @@ If you found this useful or want to collaborate, feel free to connect. Feedback 
 
 ---
 
-## 📝 License
-
-This project is licensed under the MIT License.
